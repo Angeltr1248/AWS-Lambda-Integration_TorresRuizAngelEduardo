@@ -26,7 +26,7 @@ exports.handler = async (event) => {
                     .toBuffer();
 
                 const newKey = key
-                    .replace(process.env.UPLOAD_PREFIX, process.env.PROCESSED_PREFIX)
+                    .replace("uploads/", "processed/")
                     .replace(/\.[^/.]+$/, "") + "_circular.png";
 
                 await s3.send(new PutObjectCommand({
