@@ -16,7 +16,7 @@ resource "aws_security_group" "sg_upload_lambda" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = { Name = "sg-upload-lambda-${var.environment}" }
+  tags = { Name = "upload-lambda-sg-${var.environment}" }
 }
 
 # Portero para la Lambda de Recorte (Trabajador Crop)
@@ -38,7 +38,7 @@ resource "aws_security_group" "sg_crop_lambda" {
 
 # Portero para el Túnel secreto de SQS
 resource "aws_security_group" "sg_vpce_sqs" {
-  name        = "sg-vpce-sqs-${var.environment}"
+  name        = "vpce-sqs-sg-${var.environment}"
   description = "Security Group para el VPC Endpoint de SQS"
   vpc_id      = aws_vpc.main.id
 
@@ -53,7 +53,7 @@ resource "aws_security_group" "sg_vpce_sqs" {
     ]
   }
 
-  tags = { Name = "sg-vpce-sqs-${var.environment}" }
+  tags = { Name = "vpce-sqs-sg-${var.environment}" }
 }
 
 
