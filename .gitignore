@@ -3,6 +3,7 @@
 .tfstate.
 crash.log
 *.tfvars
+src/package-lock.json
 
 node_modules/
 .env

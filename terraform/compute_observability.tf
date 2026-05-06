@@ -61,8 +61,8 @@ resource "aws_lambda_function" "upload_lambda" {
   timeout       = 30  # Timeout según diagrama
 
   # Usamos el ZIP temporal por ahora
-  filename         = data.archive_file.dummy_lambda.output_path
-  source_code_hash = data.archive_file.dummy_lambda.output_base64sha256
+  filename         = "${path.module}/../src/upload-lambda.zip"
+  source_code_hash = filebase64sha256("${path.module}/../src/upload-lambda.zip")
 
   # Lo metemos a la VPC (Cuartos secretos y Porteros)
   vpc_config {
@@ -90,8 +90,8 @@ resource "aws_lambda_function" "crop_lambda" {
   memory_size   = 512 # Memoria mayor porque procesar imágenes pesa
   timeout       = 60
 
-  filename         = data.archive_file.dummy_lambda.output_path
-  source_code_hash = data.archive_file.dummy_lambda.output_base64sha256
+  filename         = "${path.module}/../src/crop-lambda.zip"
+  source_code_hash = filebase64sha256("${path.module}/../src/crop-lambda.zip")
 
   vpc_config {
     subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
